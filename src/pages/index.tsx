@@ -1,18 +1,50 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount } from 'wagmi'
 
-import { Account } from '../components'
+import { WagmiEvents } from '../wagmi/WagmiEvents'
+import { WagmiReads } from '../wagmi/WagmiReads'
+import { WagmiWrites } from '../wagmi/WagmiWrites'
+import { useState } from 'react'
 
-function Page() {
+export default function Page() {
+  const [selectedComponent, selectComponent] =
+    useState<keyof typeof components>('unselected')
+
   const { isConnected } = useAccount()
+
+  const components = {
+    unselected: <>Select which component to render</>,
+    reads: <WagmiReads />,
+    writes: <WagmiWrites />,
+    events: <WagmiEvents />,
+  } as const
+
   return (
     <>
-      <h1>wagmi + RainbowKit + Next.js</h1>
-
+      <h1>EVMts example</h1>
       <ConnectButton />
-      {isConnected && <Account />}
+      {isConnected && (
+        <>
+          <hr />
+          <div style={{ display: 'flex' }}>
+            {Object.keys(components).map((component) => {
+              return (
+                <button
+                  key={component}
+                  type='button'
+                  onClick={() =>
+                    selectComponent(component as keyof typeof components)
+                  }
+                >
+                  {component}
+                </button>
+              )
+            })}
+          </div>
+          <h2>{selectedComponent}</h2>
+          {components[selectedComponent]}
+        </>
+      )}
     </>
   )
 }
-
-export default Page

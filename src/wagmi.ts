@@ -1,27 +1,36 @@
 import { getDefaultWallets } from '@rainbow-me/rainbowkit'
-import { configureChains, createClient } from 'wagmi'
-import { goerli, mainnet } from 'wagmi/chains'
-import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { publicProvider } from 'wagmi/providers/public'
+import { configureChains, createConfig } from 'wagmi'
+import { mainnet, optimismGoerli } from 'wagmi/chains'
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
-const { chains, provider, webSocketProvider } = configureChains(
-  [mainnet, ...(process.env.NODE_ENV === 'development' ? [goerli] : [])],
-  [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY! }),
-    publicProvider(),
-  ],
+const walletConnectProjectId = '898f836c53a18d0661340823973f0cb4'
+
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+	[mainnet, optimismGoerli],
+	[
+		jsonRpcProvider({
+			rpc: (chain) => {
+				const urls = {
+					1: { http: process.env.VITE_RPC_URL_1 ?? mainnet.rpcUrls.public.http[0] },
+					420: { http: process.env.VITE_RPC_URL_420 ?? optimismGoerli.rpcUrls.public.http[0] },
+				}
+				return [1, 420].includes(chain.id) ? urls[chain.id as 1 | 420] : null
+			},
+		}),
+	],
 )
 
 const { connectors } = getDefaultWallets({
-  appName: 'My wagmi + RainbowKit App',
-  chains,
+	appName: 'My wagmi + RainbowKit App',
+	chains,
+	projectId: walletConnectProjectId,
 })
 
-export const client = createClient({
-  autoConnect: true,
-  connectors,
-  provider,
-  webSocketProvider,
+export const config = createConfig({
+	autoConnect: true,
+	connectors,
+	publicClient,
+	webSocketPublicClient,
 })
 
 export { chains }
