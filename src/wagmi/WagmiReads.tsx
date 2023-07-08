@@ -1,7 +1,11 @@
 import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
-import { Address, useAccount, useContractRead } from 'wagmi'
+import { Address, useAccount, useContractRead, useNetwork } from 'wagmi'
 
 export const WagmiReads = () => {
+	const { chain } = useNetwork()
+	// in future versian of evmts this will work without casting to string
+	const chainId = String(chain?.id ?? '1') as '1' | '420'
+
 	const { address, isConnected } = useAccount()
 
 	const { data: balance } = useContractRead({
@@ -9,23 +13,23 @@ export const WagmiReads = () => {
 		 * Spreading in a method will spread abi, address and args
 		 * Hover over balanceOf and click go-to-definition should take you to the method definition in solidity if compiling from solidity
 		 */
-		...WagmiMintExample.read().balanceOf(address as Address),
+		...WagmiMintExample.read({ chainId }).balanceOf(address as Address),
 		enabled: isConnected,
 	})
 	const { data: totalSupply } = useContractRead({
-		...WagmiMintExample.read().totalSupply(),
+		...WagmiMintExample.read({ chainId }).totalSupply(),
 		enabled: isConnected,
 	})
 	const { data: tokenUri } = useContractRead({
-		...WagmiMintExample.read().tokenURI(BigInt(1)),
+		...WagmiMintExample.read({ chainId }).tokenURI(BigInt(1)),
 		enabled: isConnected,
 	})
 	const { data: symbol } = useContractRead({
-		...WagmiMintExample.read().symbol(),
+		...WagmiMintExample.read({ chainId }).symbol(),
 		enabled: isConnected,
 	})
 	const { data: ownerOf } = useContractRead({
-		...WagmiMintExample.read().ownerOf(BigInt(1)),
+		...WagmiMintExample.read({ chainId }).ownerOf(BigInt(1)),
 		enabled: isConnected,
 	})
 	return (

@@ -1,8 +1,12 @@
 import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
 import { useReducer } from 'react'
-import { useAccount, useBlockNumber, useContractEvent } from 'wagmi'
+import { useAccount, useBlockNumber, useContractEvent, useNetwork } from 'wagmi'
 
 export const WagmiEvents = () => {
+	const { chain } = useNetwork()
+	// in future versian of evmts this will work without casting to string
+	const chainId = String(chain?.id ?? '1') as '1' | '420'
+
 	const { address } = useAccount()
 
 	const { data: blockNumber } = useBlockNumber()
@@ -15,7 +19,7 @@ export const WagmiEvents = () => {
 	 * - Don't call fn and it is an object without args
 	 * - Call fn with args and fromBlock etc. and it returns an object with args
 	 */
-	const transferFromEvents = WagmiMintExample.events().Transfer({
+	const transferFromEvents = WagmiMintExample.events({ chainId }).Transfer({
 		fromBlock: blockNumber && blockNumber - BigInt(1_000),
 		args: {
 			from: address,
