@@ -1,0 +1,11 @@
+{
+  "installDependencies": true,
+  "startCommand": "pnpm dev",
+  "env": {
+    "NODE_ENV": "development",
+    "NEXT_ALCHEMY_API_KEY": "_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC",
+    "NEXT_RPC_URL_1": "eth-mainnet.alchemyapi.io/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC",
+    "NEXT_RPC_URL_420": "opt-goerli.g.alchemy.com/v2/_gg7wSSi0KMBsdKnGVfHDueq6xMB9EkC"
+  }
+}
+

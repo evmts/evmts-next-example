@@ -1,0 +1,40 @@
+{
+  "name": "evmts-next-example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@evmts/core": "^0.10.0",
+    "@rainbow-me/rainbowkit": "^1.0.11",
+    "hardhat": "^2.17.3",
+    "next": "^13.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "viem": "^1.11.1",
+    "vite": "^4.4.9",
+    "wagmi": "~1.4.2"
+  },
+  "devDependencies": {
+    "@evmts/config": "^0.10.0",
+    "@evmts/ts-plugin": "^0.10.0",
+    "@evmts/vite-plugin": "^0.10.0",
+    "@evmts/webpack-plugin": "^0.10.0",
+    "@nomicfoundation/hardhat-foundry": "^1.1.1",
+    "@openzeppelin/contracts": "^4.9.3",
+    "@types/node": "^20.6.3",
+    "@types/react": "^18.2.22",
+    "@types/react-dom": "^18.2.7",
+    "eslint": "^8.49.0",
+    "eslint-config-next": "^13.5.2",
+    "isomorphic-fetch": "^3.0.0",
+    "solc": "0.8.21",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.4"
+  }
+}
