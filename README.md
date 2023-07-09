@@ -13,6 +13,10 @@
 
 ## Visit [Docs](https://evmts.dev/) for docs, guides, API and more! 📄
 
+To use this plugin with Visual Studio Code, you should set your workspace's version of TypeScript, which will load plugins from your tsconfig.json file.
+
+For instructions, see: [Using the workspace version of TypeScript](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript).
+
 ## ✨ What is this?
 
 This is a [EVMts](https://evmts.dev) + [wagmi](https://wagmi.sh) + [RainbowKit](https://rainbowkit.com) + [Next.js](https://nextjs.org) boilerplate to get started using EVMts quickly
