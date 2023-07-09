@@ -36,6 +36,16 @@ describe("WagmiMintExample", function () {
     console.log(receipt.contractAddress);
     const data = await publicClient.readContract(WagmiMintExample.read({ chainId: `${hardhat.id}` }).balanceOf(accounts[0]));
     expect(data).toEqual(0n);
+
+    // Try mint function
+
+    // Doesn't work
     await walletClient.writeContract({...WagmiMintExample.write({ chainId: `${hardhat.id}` }).mint(),account: accounts[0]});
+    // Works
+    await walletClient.writeContract({...WagmiMintExample.write({ chainId: `${hardhat.id}` }).mint(1n),account: accounts[0]});
+
+    // Assert that the balance is now 1
+    const afterMint = await publicClient.readContract(WagmiMintExample.read({ chainId: `${hardhat.id}` }).balanceOf(accounts[0]));
+    expect(afterMint).toEqual(1n);
   });
 });
