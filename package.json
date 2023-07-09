@@ -6,12 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest"
   },
   "dependencies": {
-    "@evmts/core": "^0.2.0",
-    "@evmts/vite-plugin": "^0.2.0",
-    "@nomicfoundation/hardhat-foundry": "^1.0.2",
+    "@evmts/core": "^0.3.0",
     "@rainbow-me/rainbowkit": "^1.0.5",
     "hardhat": "^2.16.1",
     "next": "^13.4.9",
@@ -23,8 +22,10 @@
   },
   "devDependencies": {
     "@evmts/config": "^0.1.0",
-    "@evmts/ts-plugin": "^0.2.0",
-    "@evmts/webpack-plugin": "^0.2.0",
+    "@evmts/ts-plugin": "^0.3.0",
+    "@evmts/vite-plugin": "^0.3.0",
+    "@evmts/webpack-plugin": "^0.3.0",
+    "@nomicfoundation/hardhat-foundry": "^1.0.2",
     "@openzeppelin/contracts": "^4.9.2",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
