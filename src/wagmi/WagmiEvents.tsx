@@ -1,11 +1,11 @@
 import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
 import { useReducer } from 'react'
-import { useAccount, useBlockNumber, useContractEvent, useNetwork } from 'wagmi'
+import { useAccount, useBlockNumber, useChainId, useContractEvent, useNetwork } from 'wagmi'
+import { SupportedChainIds } from '../wagmi'
 
 export const WagmiEvents = () => {
-	const { chain } = useNetwork()
 	// in future versian of evmts this will work without casting to string
-	const chainId = String(chain?.id ?? '1') as '1' | '420'
+	const chainId = String(useChainId()) as SupportedChainIds
 
 	const { address } = useAccount()
 

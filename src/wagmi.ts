@@ -33,4 +33,6 @@ export const config = createConfig({
 	webSocketPublicClient,
 })
 
-export { chains }
+type SupportedChainIds = `${typeof chains[number]["id"]}`;
+
+export { chains, type SupportedChainIds }

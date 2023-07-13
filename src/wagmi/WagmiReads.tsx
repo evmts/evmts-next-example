@@ -1,10 +1,10 @@
 import { WagmiMintExample } from '../contracts/WagmiMintExample.sol'
-import { Address, useAccount, useContractRead, useNetwork } from 'wagmi'
+import { Address, useAccount, useChainId, useContractRead, useNetwork } from 'wagmi'
+import { SupportedChainIds } from '../wagmi'
 
 export const WagmiReads = () => {
-	const { chain } = useNetwork()
 	// in future versian of evmts this will work without casting to string
-	const chainId = String(chain?.id ?? '1') as '1' | '420'
+	const chainId = String(useChainId()) as SupportedChainIds
 
 	const { address, isConnected } = useAccount()
 
